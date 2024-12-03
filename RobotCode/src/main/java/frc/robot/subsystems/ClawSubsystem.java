@@ -1,4 +1,4 @@
-package frc.robot.subystems;
+package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
@@ -43,8 +43,6 @@ public class ClawSubsystem extends SubsystemBase
 		if (clawMotorLeft.getStickyFault(FaultID.kHasReset)
 				|| clawMotorRight.getStickyFault(FaultID.kHasReset))
 		{
-			TeamMotorUtil.optimizeCANSparkBusUsage(clawMotorLeft);
-			TeamMotorUtil.optimizeCANSparkBusUsage(clawMotorRight);
 			clawMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
 			clawMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 20);
 

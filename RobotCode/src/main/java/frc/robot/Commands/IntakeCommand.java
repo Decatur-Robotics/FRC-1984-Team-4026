@@ -7,19 +7,18 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeCommand extends Command
 {
 	private IntakeSubsystem intake;
-	public IntakeCommand(IntakeSubsystem intake){
+	private double desiredVelocity;
+	private double desiredRotation;
+	public IntakeCommand(IntakeSubsystem intake, double desiredVelocity, double desiredRotation){
 		this.intake = intake;
+		this.desiredVelocity = desiredVelocity;
+		this.desiredRotation = desiredRotation;
 		addRequirements(intake);
 	}
 	@Override
 	public void initialize(){
-		intake.setVelocity(IntakeConstants.INTAKING_VELOCITY);
-		intake.setRotation(IntakeConstants.INTAKE_OUT_ROTATION);
-	}
-	
-	public void end(){
-		intake.setRotation(IntakeConstants.INTAKE_OUT_ROTATION);
-		intake.setVelocity(IntakeConstants.REST_VELOCITY);
+		intake.setVelocity(this.desiredVelocity);
+		intake.setRotation(this.desiredRotation);
 	}
 }
 
