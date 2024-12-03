@@ -25,10 +25,10 @@ public class RobotContainer
 
 	private final ShuffleboardTab ShuffleboardTab;
 
-	public ArmSubsytem armSubsytem;
-	public ClawSubsystem clawSubsystem;
-	public IntakeSubsystem intakeSubsystem;
-	public ElevatorSubsystem elevatorSubsystem;
+	private ArmSubsytem armSubsytem;
+	private ClawSubsystem clawSubsystem;
+	private IntakeSubsystem intakeSubsystem;
+	private ElevatorSubsystem elevatorSubsystem;
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -39,6 +39,10 @@ public class RobotContainer
 		ShuffleboardTab = Shuffleboard.getTab("Tab 1");
 
 		// Instantiate subsystems
+		armSubsytem = new ArmSubsytem();
+		clawSubsystem = new ClawSubsystem();
+		intakeSubsystem = new IntakeSubsystem();
+		elevatorSubsystem = new ElevatorSubsystem();
 
 		// Configure the button bindings
 		configurePrimaryBindings();
