@@ -33,7 +33,8 @@ public class RobotContainer
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
-	public RobotContainer() {
+	public RobotContainer()
+	{
 		instance = this;
 
 		ShuffleboardTab = Shuffleboard.getTab("Tab 1");
@@ -49,51 +50,66 @@ public class RobotContainer
 		configureSecondaryBindings();
 	}
 
-	private void configurePrimaryBindings() {
+	private void configurePrimaryBindings()
+	{
 
 		final Joystick controller = new Joystick(0);
 
 		// TODO: REGISTER SUBSYSTEMS and I think make them final (check github)
 
+		final JoystickButton LeftTrigger = new JoystickButton(controller,
+				LogitechControllerButtons.triggerLeft);
+		final JoystickButton RightTrigger = new JoystickButton(controller,
+				LogitechControllerButtons.triggerRight);
+		final JoystickButton LeftBumper = new JoystickButton(controller,
+				LogitechControllerButtons.bumperLeft);
+		final JoystickButton BumperRight = new JoystickButton(controller,
+				LogitechControllerButtons.bumperRight);
+		final JoystickButton AButton = new JoystickButton(controller, LogitechControllerButtons.a);
+		final JoystickButton BButton = new JoystickButton(controller, LogitechControllerButtons.b);
+		final JoystickButton XButton = new JoystickButton(controller, LogitechControllerButtons.x);
+		final JoystickButton YButton = new JoystickButton(controller, LogitechControllerButtons.y);
+		final JoystickButton UpButton = new JoystickButton(controller,
+				LogitechControllerButtons.up);
+		final JoystickButton DownButton = new JoystickButton(controller,
+				LogitechControllerButtons.down);
+		final JoystickButton LeftButton = new JoystickButton(controller,
+				LogitechControllerButtons.left);
+		final JoystickButton RightButton = new JoystickButton(controller,
+				LogitechControllerButtons.right);
 
-		new JoystickButton(controller, LogitechControllerButtons.triggerRight)
-			.onTrue(new ClawCommand(clawSubsystem, 0));
-			
-		new JoystickButton(controller, LogitechControllerButtons.bumperRight)
-			.onTrue(new ClawCommand(clawSubsystem, 1.0));
+		// Claw buttons
+		RightTrigger.whileTrue(new ClawCommand(clawSubsystem, 0));
 
-		
-		new JoystickButton(controller, LogitechControllerButtons.y)
-			.onTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.UPPER));
-		new JoystickButton(controller, LogitechControllerButtons.x)
-			.onTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.MIDDLE));
-		new JoystickButton(controller, LogitechControllerButtons.a)
-			.onTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.LOWER));
+		BumperRight.whileTrue(new ClawCommand(clawSubsystem, 1.0));
 
-			
-		new JoystickButton(controller, LogitechControllerButtons.triggerLeft)
-			.onTrue(new IntakeCommand(intakeSubsystem, 1.0, 0));
+		// Elevator buttons
+		YButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.UPPER));
 
-		new JoystickButton(controller, LogitechControllerButtons.b)
-			.onTrue(new IntakeCommand(intakeSubsystem, 0, 1));
-		
-		new JoystickButton(controller, LogitechControllerButtons.bumperLeft)
-			.onTrue(new IntakeCommand(intakeSubsystem, -1.0, 0));
+		XButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.MIDDLE));
+		AButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.LOWER));
 
-		new JoystickButton(controller, LogitechControllerButtons.down)
-			.onTrue(new ArmCommand(armSubsytem, -1));
-		new JoystickButton(controller, LogitechControllerButtons.up).onTrue(new ArmCommand(armSubsytem, 1));
-		new JoystickButton(controller, LogitechControllerButtons.left)
-			.onTrue(new ArmCommand(armSubsytem, 0));
-		new JoystickButton(controller, LogitechControllerButtons.right)
-			.onTrue(new ArmCommand(armSubsytem, 0));
+		// Intake buttons
+		LeftTrigger.whileTrue(new IntakeCommand(intakeSubsystem, 1.0, 0));
+
+		BButton.whileTrue(new IntakeCommand(intakeSubsystem, 0, 1));
+
+		LeftBumper.whileTrue(new IntakeCommand(intakeSubsystem, -1.0, 0));
+
+		// Arm buttons
+		DownButton.whileTrue(new ArmCommand(armSubsytem, -1));
+		UpButton.whileTrue(new ArmCommand(armSubsytem, 1));
+		LeftButton.whileTrue(new ArmCommand(armSubsytem, 0));
+		RightButton.whileTrue(new ArmCommand(armSubsytem, 0));
 
 	}
 
-	private void configureSecondaryBindings() {}
+	private void configureSecondaryBindings()
+	{}
 
 	@SuppressWarnings("unused")
-	public static ShuffleboardTab getShuffleboardTab() {
+	public static ShuffleboardTab getShuffleboardTab()
+	{
 		return instance.ShuffleboardTab;
 	}
 
