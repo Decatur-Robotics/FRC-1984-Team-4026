@@ -5,8 +5,11 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.lib.core.LogitechControllerButtons;
+import frc.robot.commands.ArmCommand;
+import frc.robot.commands.ClawCommand;
+import frc.robot.commands.ElevateCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.constants.ElevatorPosition;
-import frc.robot.constants.IntakeConstants;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -26,8 +29,6 @@ public class RobotContainer
 	private ClawSubsystem clawSubsystem;
 	private IntakeSubsystem intakeSubsystem;
 	private ElevatorSubsystem elevatorSubsystem;
-
-	
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -78,28 +79,28 @@ public class RobotContainer
 				LogitechControllerButtons.right);
 
 		// Claw buttons
-		RightTrigger.whileTrue(clawSubsystem.clawCommand(0));
+		RightTrigger.whileTrue(new ClawCommand(clawSubsystem, 0));
 
-		BumperRight.whileTrue(clawSubsystem.clawCommand(1.0));
+		BumperRight.whileTrue(new ClawCommand(clawSubsystem, 1.0));
 
 		// Elevator buttons
-		YButton.whileTrue(elevatorSubsystem.elevatorCommand(ElevatorPosition.UPPER));
+		YButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.UPPER));
 
-		XButton.whileTrue(elevatorSubsystem.elevatorCommand(ElevatorPosition.MIDDLE));
-		AButton.whileTrue(elevatorSubsystem.elevatorCommand(ElevatorPosition.LOWER));
+		XButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.MIDDLE));
+		AButton.whileTrue(new ElevateCommand(elevatorSubsystem, ElevatorPosition.LOWER));
 
 		// Intake buttons
-		LeftTrigger.whileTrue(intakeSubsystem.intakeCommand(IntakeConstants.INTAKING_VELOCITY));
+		LeftTrigger.whileTrue(new IntakeCommand(intakeSubsystem, 1.0, 0));
 
-		BButton.whileTrue(intakeSubsystem.intakeCommand(IntakeConstants.INTAKING_VELOCITY));
+		BButton.whileTrue(new IntakeCommand(intakeSubsystem, 0, 1));
 
-		LeftBumper.whileTrue(intakeSubsystem.intakeCommand(IntakeConstants.INTAKING_VELOCITY));
+		LeftBumper.whileTrue(new IntakeCommand(intakeSubsystem, -1.0, 0));
 
 		// Arm buttons
-		DownButton.whileTrue(armSubsytem.armCommand(-1));
-		UpButton.whileTrue(armSubsytem.armCommand(1));
-		LeftButton.whileTrue(armSubsytem.armCommand(0));
-		RightButton.whileTrue(armSubsytem.armCommand(0));
+		DownButton.whileTrue(new ArmCommand(armSubsytem, -1));
+		UpButton.whileTrue(new ArmCommand(armSubsytem, 1));
+		LeftButton.whileTrue(new ArmCommand(armSubsytem, 0));
+		RightButton.whileTrue(new ArmCommand(armSubsytem, 0));
 
 	}
 

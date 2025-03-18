@@ -1,4 +1,4 @@
-package frc.robot.Commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ArmConstants;
@@ -8,7 +8,7 @@ import frc.robot.constants.IntakeConstants;
 import frc.robot.subsystems.ArmSubsytem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subystems.ClawSubsystem;
 
 public class IntakeCommand extends Command {
 
@@ -17,13 +17,11 @@ public class IntakeCommand extends Command {
 	private ElevatorSubsystem elevator;
 	private ClawSubsystem claw;
 	private boolean limitSwitchPressed;
-	private double desiredVelocity;
 
-
-	public IntakeCommand(IntakeSubsystem intake, double desiredVelocity) {
+	public IntakeCommand(IntakeSubsystem intake) {
 		this.intake = intake;
 		this.desiredVelocity = desiredVelocity;
-
+		this.desiredRotation = desiredRotation;
 		addRequirements(intake);
 	}
 	
@@ -44,7 +42,7 @@ public class IntakeCommand extends Command {
 		limitSwitchPressed = claw.getLimitSwitch();
 		if(limitSwitchPressed){
 			claw.setClawSpeed(0);
-			intake.setVelocity(desiredVelocity);
+			intake.setVelocity(0);
 			intake.setRotation(IntakeConstants.INTAKE_IN_ROTATION);
 		}
 	}

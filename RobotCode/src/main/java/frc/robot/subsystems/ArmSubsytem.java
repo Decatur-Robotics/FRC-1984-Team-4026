@@ -6,9 +6,8 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.core.motors.TeamTalonFX;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.Ports;
@@ -86,9 +85,6 @@ public class ArmSubsytem extends SubsystemBase {
 			return true;
 		}
 		return false;
-	}
-	public Command armCommand(double targetAngle){
-		return Commands.runOnce(() -> setTargetRotation(targetAngle));
 	}
 
 }
